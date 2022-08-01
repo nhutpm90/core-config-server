@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>core.microservices.config</groupId>
 	<artifactId>core-config-server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>core-config-server</name>
 	<description>Core Config Server</description>
 	<properties>
