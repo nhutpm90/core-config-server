@@ -11,7 +11,7 @@ services:
       - SERVER_PORT=8888
       - CONFIG_SERVER_URI=https://github.com/nhutpm90/config-server-repo.git
       - CONFIG_SERVER_USERNAME=nhutpm90
-      - CONFIG_SERVER_PASSWORD=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
+      - CONFIG_SERVER_PASSWORD=
 
   test-config-server:
     image: nhutpm90/spring-cloud-playground/config-client-test-server:1.0.0
@@ -24,5 +24,16 @@ services:
       - SERVER_PORT=8889
       - SPRING_CLOUD_CONFIG_URI=http://core-config-server:8888/
 
+  core-eureka-server:
+    image: nhutpm90/spring-cloud-playground/core-eureka-server:1.0.0
+    ports:
+      - "8761:8761"
+    networks:
+      - cloud-playground-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+      - SERVER_PORT=8761
+      - SPRING_CLOUD_CONFIG_URI=http://core-config-server:8888/
+      
 networks:
   cloud-playground-network:
