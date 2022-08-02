@@ -1,7 +1,11 @@
 package core.microservices.config.api;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +20,21 @@ public class LiveApi {
 	@Autowired
 	private Environment environment;
 
-	@GetMapping("/live-check")
-	public String liveCheck() throws Exception {
-		Integer port = Integer.parseInt(environment.getProperty("server.port"));
-		return String.format("Core Config Server:: %s", port);
+	@GetMapping(value = {"/", "/live-check"})
+	public Map<String, String> liveCheck(@RequestParam(required = false) List<String> envs) {
+		if(envs == null) {
+			envs = new ArrayList<>();
+		}
+		envs.addAll(Arrays.asList("spring.application.name", "server.port"));
+		return this.getEnvironmentConfig(new HashSet<>(envs));
 	}
 
-	@GetMapping("/env-check")
-	public Map<String, String> testParam(@RequestParam("envs") List<String> envs) throws Exception {
+	public Map<String, String> getEnvironmentConfig(Set<String> envs) {
 		Map<String, String> ret = envs.stream()
 				.collect(Collectors.toMap(
 						k -> k, 
 						v -> environment.getProperty(v)));
 		return ret;
 	}
+	
 }

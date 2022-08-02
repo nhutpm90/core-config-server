@@ -1,4 +1,5 @@
 FROM openjdk:11-slim
 WORKDIR /opt/spring-cloud-playground
-COPY target/core-config-server-0.0.1.jar .
-ENTRYPOINT ["java","-jar","core-config-server-0.0.1.jar"]
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
