@@ -20,3 +20,15 @@ mvnw clean install -Dmaven.test.skip=true && docker build -t nhutpm90/spring-clo
 
 ++ Test Eureka Server
 mvnw clean install -Dmaven.test.skip=true && docker build -t nhutpm90/spring-cloud-playground/eureka-client-test-server:1.0.0 .
+
++ Core Api Gateway Server
+mvnw clean install -Dmaven.test.skip=true && docker build -t nhutpm90/spring-cloud-playground/core-api-gateway-server:1.0.0 .
+
+++ Test Core Api Gateway Server 01
+mvnw clean install -Dmaven.test.skip=true && docker build -t nhutpm90/spring-cloud-playground/gateway-client01-test-server:1.0.0 .
+
+++ Test Core Api Gateway Server 02
+mvnw clean install -Dmaven.test.skip=true && docker build -t nhutpm90/spring-cloud-playground/gateway-client02-test-server:1.0.0 .
+
++ Core Auth Server
+mvnw clean install -Dmaven.test.skip=true && docker build -t nhutpm90/spring-cloud-playground/core-auth-server:1.0.0 .
